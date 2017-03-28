@@ -7,5 +7,5 @@
 - [X] Working "writer modal" that pops up when you click on a Quest
 - [X] Ability to submit Quests and have your stories appear in the "Stories" Feed
 - [ ] Options for timers and other constraints on stories (like character/word count, rudimentary NLP sentiment) 
-- [ ] Options to make and submit your own Quests with prerequisites (in the actual Storify, the Quests you make will only hit the main page if they are popular enough
+- [ ] Options to make and submit your own Quests with prerequisites (in the actual Storify, the Quests you make will only hit the main page if they are popular enough)
 - [ ] Start work on backend
