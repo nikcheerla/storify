@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Droid+Serif:400,400italic,700);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Droid+Serif:400,400italic,700|family=Open+Sans:400,700,bold,italic|Lato:400,700,bold,italic|Varela+Round:400,700,bold,italic|Raleway:400,700,bold,italic|Montserrat:400,700,bold,italic);
 /* line 12, ../sass/_type.sass */
 body {
   line-height: 1.65;
@@ -89,7 +89,7 @@ h2.favorites {
 
 /* line 68, ../sass/_type.sass */
 h3 {
-  font-size: 26px;
+  font-size: 24px;
   font-size: 2.6rem;
 }
 
@@ -2011,23 +2011,175 @@ a:hover, a:active, a:focus {
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
+
     z-index: 1; /* Sit on top */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgb(30,30,60); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
 /* Modal Content/Box */
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
+    margin: 4% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
     width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+    color: #aaa;
+    float: right;
+    top: 0px;
+    right: 10px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+.timer {
+   width: 40px;
+   height: 40px;
+   background-color: green;
+   margin: 0 auto; 
+   display: block; 
+   width: 322px;
+}
+
+
+
+.sleek {
+  font-family: 'Source Sans Pro', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+
+#validateDiv, #quitDiv {
+    text-align: center;
+    display: table-cell;
+    width: 50%;
+  }
+
+#submitQuest, #quitQuest, #createquest {
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    /* ...and now for the proper property */
+    transition:.5s;
+    width: 250px;
+    font-family: "Montserrat", sans-serif;
+    background-color: lightgray;
+    color: white;
+  }
+
+#submitQuest.valid, #createquest.valid {
+  background-color: rgb(184, 49, 47);
+}
+
+#submitQuest.valid:hover, #createquest.valid:hover {
+  color: rgb(184, 49, 47);
+  background-color: lightred;
+}
+
+#quitQuest:hover {
+  background-color: gray;
+}
+
+.invalid {
+  color: red;
+}
+
+
+#clockdiv{
+  font-family: sans-serif;
+  color: #fff;
+  display: inline-block;
+  font-weight: 100;
+  text-align: center;
+  font-size: 30px;
+}
+
+#clockdiv > div{
+  padding: 10px;
+  border-radius: 3px;
+  background: #00BF96;
+  display: inline-block;
+}
+
+#clockdiv div > span{
+  padding: 15px;
+  border-radius: 3px;
+  background: #00816A;
+  display: inline-block;
+}
+
+.smalltext{
+  padding-top: 5px;
+  font-size: 16px;
+}
+
+ hr {
+    display: block;
+    height: 3px;
+    border: 0;
+    border-top: 3px solid #ccc;
+    margin: 0 0;
+    padding: 0;
+    width:100%
+}
+
+
+#timer, #statsUpgrade, #validated, #timerEdit, #statsUpgradeEdit, #validatedEdit, #prerequisites, #bestowed, #prerequisitesEdit, #bestowedEdit {
+  font-family: 'Varela Round', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: rgb(110, 110, 110);
+  display: inline-block;
+}
+
+
+#timer, #timerEdit, #prerequisites, #prerequisitesEdit {
+  float: left;
+  text-align: left
+}
+
+#validated, #validatedEdit {
+  float: center;
+  text-align: center
+}
+
+
+#statsUpgrade, #statsUpgradeEdit, #bestowed, #bestowedEdit {
+  float: right;
+  text-align: right;
+}
+
+#questHumorEdit, #questEmotionEdit, #questPersuasivenessEdit {
+  display: inline-block;
+}
+
+
+#topWriterPane, #topCreatePane, #middleWriterPane, #middleWriterPaneEdit {
+  text-align: center
+}
+
+#bottomWriterPane {
+  text-align: center;
+  display: table;
+  width: 100%;
+  table-layout: fixed;
 }
 
 

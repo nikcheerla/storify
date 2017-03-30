@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/font-awesome.min.css">
         <link rel="stylesheet" href="css/main.css">
+       
 
         <!--[if lt IE 9]>
             <script src="/js/vendor/html5shiv.min.js"></script>
@@ -24,7 +25,19 @@
     </head>
     <body>
         
-        <!-- The Modal -->
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Writing Modal -->
         <div id="writerModal" class="modal">
 
             <!-- Modal content -->
@@ -41,6 +54,12 @@
                 <link href='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/css/plugins/code_view.min.css' rel='stylesheet' type='text/css' />
                 <link href='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/css/froala_style.min.css' rel='stylesheet' type='text/css' />
 
+                <!-- Include theme files. -->
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/css/themes/dark.min.css" rel="stylesheet" type="text/css" />
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/css/themes/red.min.css" rel="stylesheet" type="text/css" />
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/css/themes/gray.min.css" rel="stylesheet" type="text/css" />
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/css/themes/royal.min.css" rel="stylesheet" type="text/css" />
+
 
                 <!-- Include JS file. -->
                 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js"></script>
@@ -54,16 +73,30 @@
                 <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/js/plugins/paragraph_format.min.js'></script>
                 <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/js/plugins/paragraph_style.min.js'></script>
 
-                <h1 id="questTitle"> Quest: Six-Word Autobiography </h1>
+
+
+                <div id='topWriterPane'>
+                    <h4 id="timer"  align="left"></h4>
+                    <h4 id="validated"  align="center">Not Validated</h4>
+                    <h4 id="statsUpgrade" align="right"> Humor <span id="questHumor" style="color:green">+1</span>, Emotion <span style="color:green" id="questEmotion">+5</span>, Persuasiveness <span id="questPersuasiveness" style="color:green">+1</span> </h4>
+                </div>
+                <div id='middleWriterPane'>
+                    <h4 id="prerequisites"  align="right">Prerequisites: None</h4>
+                    <h4 id="bestowed"  align="left">Grants: Apprentice Writer</h4>
+                </div>
+
+                <hr> </hr>
+                <h3 id="questPrompt" class="sleek"> Write an autobiography of your life, but using only six words. </h3>
                 <br/>
-                <h4 id="questPrompt"> Prompt: Write an autobiography of your life, but using only six words. </h4>
-                <br/>
+
+
+                
                 <textarea id='textEditor' class='small'> </textarea>
                 
                 <script>
                     var tb = [
                           "fullscreen", "bold", "italic", "underline", "strikeThrough",
-                          "fontFamily", "fontSize", "html",
+                          "html",
                           "|", "color", "paragraphFormat", "align", "formatOL", "formatUL", "outdent", "indent", "clearFormatting",
                           "|", "insertLink", "insertTable", 
                           "|", /*"undo", "redo",*/ "save"];
@@ -74,21 +107,163 @@
                         toolbarButtonsMD: tb,
                         toolbarButtonsSM: tb,
                         toolbarButtonsXS: tb,
-                        fontSizeDefaultSelection: '18',
-                        fontFamily: ["Droid Serif"],
+                        height: 300,
+                        theme: 'red',
+                        fontFamily: ["Droid Serif", "Lato"],
                         fontFamilyDefaultSelection: 'Droid Serif',
-                        enter: $.FroalaEditor.ENTER_BR,
+                        enter: $.FroalaEditor.ENTER_P,
                         fontSizeSelection: true,
                     })
-
                 </script>
 
-                <br> </br>
+                <br/>
+                <footer id='bottomWriterPane'>
+                <div id='quitDiv'>
+                    <button class='btn btn-lg' id="quitQuest"> Quit Quest </button>
+                </div>
+                <div id='submitDiv'>
+                    <button class='btn btn-lg' id="submitQuest"> Submit Response </button>
+                </div>
 
-                <button class='btn btn-lg' id="submitQuest"> Submit </button>
+                </footer>
             </div>
 
         </div>
+
+
+
+
+
+        <!-- Creating Modal -->
+        <div id="createModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+
+                <!-- Include external CSS. -->
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
+
+                <!-- Include Editor style. -->
+                <link href='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/css/froala_editor.min.css' rel='stylesheet' type='text/css' />
+                <link href='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/css/plugins/fullscreen.min.css' rel='stylesheet' type='text/css' />
+                <link href='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/css/plugins/help.min.css' rel='stylesheet' type='text/css' />
+                <link href='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/css/plugins/code_view.min.css' rel='stylesheet' type='text/css' />
+                <link href='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/css/froala_style.min.css' rel='stylesheet' type='text/css' />
+
+                <!-- Include theme files. -->
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/css/themes/dark.min.css" rel="stylesheet" type="text/css" />
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/css/themes/red.min.css" rel="stylesheet" type="text/css" />
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/css/themes/gray.min.css" rel="stylesheet" type="text/css" />
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/css/themes/royal.min.css" rel="stylesheet" type="text/css" />
+
+
+                <!-- Include JS file. -->
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js"></script>
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js"></script>
+
+                <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/js/froala_editor.min.js'></script>
+                <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/js/plugins/font_family.min.js'></script>
+                <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/js/plugins/font_size.min.js'></script>
+                <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/js/plugins/fullscreen.min.js'></script>
+                <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/js/plugins/code_view.min.js'></script>
+                <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/js/plugins/paragraph_format.min.js'></script>
+                <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/js/plugins/paragraph_style.min.js'></script>
+
+
+
+                <div id='topCreatePane'>
+                    <h4 id="timerEdit"  class="editQuest" align="left">05:00</h4>
+                    <h4 id="validatedEdit" class="editQuest" align="center">200 - 600 words</h4>
+                    <h4 id="statsUpgradeEdit" align="right"> Humor <span id="questHumorEdit" class = "editQuest" style="color:green">+1</span>, Emotion <span style="color:green" id="questEmotionEdit" class="editQuest">+5</span>, Persuasiveness <span id="questPersuasivenessEdit" style="color:green" class="editQuest">+1</span> </h4>
+                </div>
+
+                <div id='middleWriterPaneEdit'>
+                    <h4 id="prerequisitesEdit"  class='editQuest' align="right">Prerequisites: None</h4>
+                    <h4 id="bestowedEdit"  class='editQuest' align="left">Grants: Apprentice Writer</h4>
+                </div>
+
+                <hr> </hr>
+                <h3 id="questTitleEdit" class="sleek editQuest"> Possible Quest Title </h3>
+                <h4 id="questPromptEdit" class="sleek editQuest"> Possible Quest Content. (Click anywhere to edit.) </h4>
+                <br/>
+
+                <script>
+                    var tb = [];
+
+                    $('.editQuest').froalaEditor({
+                      toolbarInline: true,
+                        toolbarButtons: tb,
+                        toolbarButtonsMD: tb,
+                        toolbarButtonsSM: tb,
+                        toolbarButtonsXS: tb,
+                        multiLine: false,
+                        enter: $.FroalaEditor.ENTER_BR,
+                    });
+                    
+                </script>
+                
+                <button class='btn btn-lg' id="createquest"> Create New Quest </button>
+
+                </footer>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+
+
+        <!--
+
+        <div id="createModal" class="modal">
+
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h1> Create a Quest </h1>
+                
+                <form id='create'>
+                    Title: <input type='text' id='title'> </input> <br></br>
+                    <textarea id='createprompt'> </textarea>
+                    <br></br>
+                    <select id='duration'>
+                        <option value="20">20 sec</option>
+                        <option value="60">1 minute</option>
+                        <option value="300">5 minutes</option>
+                        <option value="900">15 minutes</option>
+                        <option value="1800">30 minutes</option>
+                    </select>
+
+                    Classes: <input type='text' id='classes'> </input> <br></br>
+
+                    <br></br>
+                    <h4> Parent Quests </h4>
+                    <p> You need to complete quests before you can create new ones. </p>
+                    <br></br>
+                    
+                </form>
+
+                <button id="createquest"> Submit </button>
+            </div>
+
+        </div>
+
+    -->
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -110,7 +285,7 @@
                         </div>
                         <div class="secondary-info">
                             <p>
-                                <a class="btn btn-primary" href="#"><i class="fa fa-user-plus"></i>Join Our Newsletter</a>
+                                <button class="btn btn-primary" id='createNewQuest'><i class="fa fa-user-plus"></i>Submit New Quest</button>
                             </p>
                         </div>
                     </div>
