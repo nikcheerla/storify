@@ -266,7 +266,7 @@
 
 
 
-
+x
 
         <main class="container left-container">
             <div class="row">
@@ -275,9 +275,34 @@
 
                 <section class="sidebar col-md-5 col-sm-12" style="background-image: url(img/default-sidebar.jpg">
 
-                    
+                     <style>
+
+                        .chart {
+                          fill: white;
+                          width: 60%;
+                          height: 30%;
+                          color: black;
+                          font-family: 'Varela Round', 'Lato';
+                          display: table;
+                        }
+                        .c3-axis-y .tick {
+                           display: none;
+                        }
+
+                        </style>
+                        <div class="chart"></div>
+                        <div>
+                        <h4 id='classesBox' class="data-font white" style="position: absolute; left: 12%">Classes: </h4> 
+                        <div>
+
+                        <link href="css/c3.min.css" rel="stylesheet" type="text/css">
+                        <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+                        <script src="js/c3.min.js"></script>
 
                     <div class="site-info">
+
+
+
 
                         <div class="primary-info">
                             <h1>Storify </h1>

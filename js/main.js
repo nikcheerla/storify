@@ -105,9 +105,70 @@ $(document).ready(function(){
 });
 
 
-var humor = 0
-var persuasiveness = 0
-var emotion = 0
+
+
+
+
+
+
+label = ["Persuasiveness", "Emotion", "Humor"]    
+var chart = c3.generate({
+    data: {
+        columns: [
+            ['Stats', 5, 5, 5],
+        ],
+        colors: {
+            Stats: '#314edf',
+        }, 
+        color: function (color, d) {
+            // d will be 'id' when called for legends
+            colorR = 0 +  Math.min(d.value - 5, 80)*2*(252)/80
+            colorG = 0 + Math.min(d.value - 5, 80)*(253)/80
+            colorB = 80 + Math.min(d.value - 5, 80)*(151 - 4)/80
+
+            console.log(colorR, colorG, colorB)
+
+            return d.id === 'Stats' ? d3.rgb(colorR, colorG, colorB).darker(d.value / 150) : color;
+        },
+        type: 'bar'
+    },
+    bindto: ".chart",
+    bar: {
+        width: {
+            ratio: 0.5 // this makes bar width 50% of length between ticks
+        }
+        // or
+        //width: 100 // this makes bar width 100px
+    },
+    axis: {
+        rotated: true,
+        y: {show:false},
+        x: {
+            type: 'category',
+            tick: {
+                
+            }
+        }
+    },
+    tooltip: {
+        format: {
+            title: function (d) { return label[d] },
+            value: function (value, ratio, id) {
+                return d3.format(',')(value);
+            }
+//            value: d3.format(',') // apply this format to both y and y2
+        }
+    },
+    legend: {
+        show: false
+    },
+});
+
+
+
+var humor = 5
+var persuasiveness = 5
+var emotion = 5
 var classes = ""
 
 
@@ -366,8 +427,8 @@ validator = function(story) {
 
 args = {title: "Infiltrate The Cell", status:"CLOSED", parents:[memory], image_file:"img/cover-7.jpg",
     prompt:"A terrorist group has been infiltrated by so many agencies that it is now run by spies, unbeknownst to the spies themselves. This fact becomes apparent to an actual extremist who joins their ranks. (200 - 600 words).", 
-    duration: 1200, id:"cell",
-    classes:"None", humor:25, persuasiveness:5, emotion:2}
+    duration: 1200, id:"cell", validator:validator,
+    classes:"Comic", humor:25, persuasiveness:5, emotion:2}
 var cell = makeQuest(args);
 
 nodes = [six, sales_pitch, memory, haiku, cell]
@@ -420,17 +481,12 @@ function recalc() {
             updateArgs(node)
         }
     }
-
-    for (node of nodes) {
-        if (node.args.status=="COMPLETE") {
-            classes += node.args.classes + ", "
-        }
-    }
 }
 
 
 function validate() {
     if (!cur_target) return 
+    if ($("#writerModal")[0].style.display == 'none') return false
 
     html = $("#textEditor").froalaEditor('html.get');
     validation_resp = cur_target.args.validator(html)
@@ -454,7 +510,22 @@ $('#submitQuest').click(function() {
         $(".modal-content").style.backgroundColor = 'red'
         return
     }
-    cur_target.args.status = "COMPLETE"
+    if (cur_target.args.status != "COMPLETE") {
+        cur_target.args.status = "COMPLETE"
+        classes += cur_target.args.classes + ", "
+        humor += cur_target.args.humor
+        persuasiveness += cur_target.args.persuasiveness
+        emotion += cur_target.args.emotion
+        $("#classesBox")[0].innerHTML = "Classes: " + classes
+
+        chart.load({
+            columns: [
+                ['Stats', persuasiveness, humor, emotion]
+            ]
+        });
+
+    }
+
     updateArgs(cur_target)
 
     $("#writerModal")[0].style.display = "none"
@@ -504,6 +575,7 @@ $('#createquest').click(makeNode);
 
 
 function validateNode() {
+    if ($("#createModal")[0].style.display != 'block') return false
     $('#createquest').removeClass("valid")
 
     title = $("#questTitleEdit").froalaEditor('html.get')
